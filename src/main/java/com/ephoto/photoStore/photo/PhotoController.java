@@ -12,16 +12,18 @@ import java.util.Map;
 @RequestMapping("/")
 public class PhotoController {
 
-    final
-    PhotoList photoList;
+    final PhotoList photoList;
+    final Cart cart;
 
-    public PhotoController(PhotoList photoList) {
+    public PhotoController(PhotoList photoList, Cart cart) {
+
         this.photoList = photoList;
+        this.cart = cart;
     }
 
     @GetMapping
     ModelAndView index() {
-        return new ModelAndView("index", Map.of("items", this.photoList.getAll()));
+        return new ModelAndView("index", Map.of("items", this.photoList.getAll(), "cartTotal", this.cart.getTotalItems()));
 
     }
 }
